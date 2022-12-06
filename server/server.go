@@ -2,7 +2,7 @@ package main
 
 import (
 	"UacademyGo/grpc_example/proto-gen/dice"
-	boxDice "UacademyGo/grpc_example/services/dice"
+	boxDice "UacademyGo/grpc_example/server/services/dice"
 	"log"
 	"net"
 
@@ -18,9 +18,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	
+	c := &boxDice.TutorialService{}
 	s := grpc.NewServer()
-	dice.RegisterTutorialServer(s, &boxDice.TutorialService{})
+	dice.RegisterTutorialServer(s, c)
 
 	reflection.Register(s)
 
